@@ -1,0 +1,119 @@
+/*
+-- Basic Reset
+*/
+* {margin: 0; padding: 0;}
+
+/*
+
+/*
+-- Structure
+*/
+.site-content {
+	font-family: "PT Sans", sans-serif;
+	font-size: 1em;
+    img {max-width: 100%; vertical-align: middle;}
+/*	width: 58.75em; /* 940 / 16 */ */	
+	margin: auto;
+}
+
+/* content */
+	/* latest posts */
+    
+ 	.latest-posts {
+
+		left: 0;
+		background-image: url(field-sunny@2x.png);
+        			border-radius: 1em;
+	}   
+  	.latest-posts img {
+        border-radius: 1em;
+	}        
+	.latest-posts ul {
+		padding: 0;
+	}	
+	.post-list a {
+		text-decoration: none;
+		color: #FFF;
+		display: block;
+	}
+	.post-list li {
+		float: left;
+		width: 50%;
+ 	}
+	.post-list li:nth-child(even) {
+		float: right;
+	}
+	.post-text {
+		width: 30%;
+		float: left;
+	}
+    .post-image {
+		width: 70%;
+		float: left;
+	}
+	.post-text {
+		padding: 1.25em 1.8em;
+		box-sizing: border-box; 
+	}
+	.post-text h3 {
+			font-family: "PT Sans", sans-serif;	
+		        color: #fff;
+
+		font-weight: bold;
+		font-size: 6em;
+	}
+	.post-text p {
+
+		margin: 0;
+        text-transform: uppercase;        
+	}
+	.post-image p:nth-of-type(1) {
+    /*    margin-top: -20px; */ 
+        color: #ccc;
+		font-weight: bold;
+		font-size: 2em;
+        margin-bottom: 0.00025em;
+	}
+	.post-image p:nth-of-type(2) {
+      margin-top: 20px;                                
+        color: #333;
+		font-weight: bold;
+		font-size: 4em;
+        text-shadow: 0 1px 1px #000;
+	}    
+	.post-list a:hover h3 {
+    		opacity: 0.7;
+		text-decoration: none;
+	}
+
+
+
+/*
+-- General Use
+*/
+
+.group:before, .group:after {
+	content:  " ";
+	display: table;
+}
+
+.group:after {
+	clear: both;
+}
+
+.hide-vis {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.hide-text {
+	text-indent: 200%;
+	white-space: nowrap;
+	overflow: hidden;
+}

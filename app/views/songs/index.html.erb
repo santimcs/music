@@ -1,0 +1,37 @@
+<% content_for :functional_nav do%>
+<li><%= link_to 'Add', new_song_path %></li>
+<% end %>
+<%= currently_at 'Songs'%>
+
+<table id="songs" class="display">
+<thead>	
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Genre</th>  
+    <th>Rating</th>     
+    <th>Released</th>      
+    <th>Length</th>
+  </tr>
+</thead>
+<tbody>
+<% @songs.each do |song| %>
+  <tr>
+    <td><%= link_to(song.rank, song) %></td>
+    <td><%= song.name %></td>
+    <td><%= song.artist.first_name %></td>
+    <td><%= song.artist.last_name %></td>
+    <td><%= song.genre.name %></td>    
+    <td><%= song.rating %></td>     
+    <td><%= decade(song.released_date.year) %></td>      
+    <td><%= seconds_to_time(song.length) %></td>   
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Song', new_song_path %>

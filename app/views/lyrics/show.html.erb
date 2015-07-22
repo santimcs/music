@@ -1,0 +1,28 @@
+<% content_for :functional_nav do%>
+<li><%= link_to 'Add', new_lyric_path %></li>
+<li><%= link_to 'Edit', edit_lyric_path(@lyric) %></li>
+<li><%= link_to 'Back', lyrics_path %></li>
+<li><%= link_to 'Destroy', @lyric, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+<% end %>
+<%= currently_at 'Lyrics'%>
+
+	
+		<div id="switcher">
+        	<div class="label">Text Size</div>
+        	<button id="switcher-default">Default</button>
+        	<button id="switcher-large">Bigger</button>
+        	<button id="switcher-small">Smaller</button>
+      	</div>
+  		<h1 class="header-1">
+  			<%= @lyric.song.name %>
+		</h1>
+		</br>	
+		</br>		
+		<div class="speech">
+  			<%= simple_format(@lyric.content) %>
+		</div>
+	
+	<p>
+		<%= link_to 'Edit', edit_lyric_path(@lyric) %> |
+		<%= link_to 'Back', lyrics_path %>
+	</p>

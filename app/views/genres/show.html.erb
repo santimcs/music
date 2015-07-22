@@ -1,0 +1,14 @@
+<% content_for :functional_nav do%>
+<li><%= link_to 'Add', new_genre_path %></li>
+<li><%= link_to 'Edit', edit_genre_path(@genre) %></li>
+<li><%= link_to 'Back', genres_path %></li>
+<% end %>
+<%= currently_at 'Genres'%>
+
+<p>
+  <b>Name:</b>
+  <%= @genre.name %>
+</p>
+
+<%= link_to 'Edit', edit_genre_path(@genre) %> |
+<%= link_to 'Back', genres_path %>

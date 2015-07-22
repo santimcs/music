@@ -1,0 +1,24 @@
+#container{
+	background-color:#fff;
+	float:left;
+	width:500px;
+	border-left:500px solid #fff; /* The width and color of the left rail */
+	border-right:200px solid #c33; /* The width and color of the right rail */
+}
+#leftRail{
+	float:left;
+	width:500px;
+    margin-left: -500px;
+	position:relative;
+}
+#center{
+	float:left;
+	width:500px;
+	margin-right:-500px;
+}
+#rightRail{
+	float:right;
+	width:200px;
+	margin-right:-200px;
+	position:relative;
+}

@@ -1,0 +1,53 @@
+<%= form_for(@song) do |f| %>
+  <% if @song.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
+
+      <ul>
+      <% @song.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rank %><br />
+    <%= f.number_field :rank %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :artist_id %><br />
+    <%= f.collection_select :artist_id, Artist.all, :id, :full_name %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br />
+    <%= f.number_field :rating %>
+  </div>  
+  <div class="field">
+    <%= f.label :released_date %><br />
+    <%= f.date_select :released_date, :start_year => 1950, :end_year => 2014 %>
+  </div>   
+  <div class="field">
+    <%= f.label :genre_id %><br />
+    <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+  </div>  
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.number_field :length %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.file_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :youtube_code %><br />
+    <%= f.text_field :youtube_code %>
+  </div>  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

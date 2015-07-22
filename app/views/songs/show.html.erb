@@ -1,0 +1,87 @@
+<% content_for :functional_nav do%>
+<li><%= link_to 'Add', new_song_path %></li>
+<li><%= link_to 'Edit', edit_song_path(@song) %></li>
+<li><%= link_to 'Back', songs_path %></li>
+<li><%= link_to 'Destroy', @song, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+<% end %>
+<%= currently_at 'Songs'%>
+
+<div id="container">
+	<div id="center">
+		<br/>
+		<p align="center">
+			<%= audio_tag(@song.location, autoplay: false, controls: true) %>
+		</p>
+
+  			<b>Lyric:</b>
+  			<% if Lyric.exists?(:song_id=>@song.id) %>
+  			<%= simple_format(@song.lyric.content) %>
+  			<% else %>
+  			<%= 'No lyric' %>
+  			<% end %>
+
+	</div>
+	<div id="leftRail">
+		<object width="300" height="247">
+			<param name="movie"></param>
+			<param name="wmode" value="transparent"></param><param name="allowFullScreen" value="true"></param>
+			<param name="allowScriptAccess" value="always"></param>
+			<embed <%= %[src=http://www.youtube.com/v/#{@song.youtube_code}?version=3] %>
+				type="application/x-shockwave-flash" allowscriptaccess="always" 
+				allowfullscreen="true" wmode="transparent" width="480" height="360"> 
+			</embed>	
+		</object>	
+		<p>
+  			<b>Rank:</b>
+  			<%= @song.rank %>
+		</p>
+		<p>
+  			<b>Name:</b>
+  			<%= @song.name %>
+		</p>	
+		<p>
+  			<b>Genre:</b>
+  			<%= @song.genre.name %>
+		</p>
+		<p>
+  			<b>Rating:</b>
+  			<%= @song.rating %>
+		</p>		
+		<p>
+  			<b>Released_date:</b>
+  			<%= @song.released_date.strftime("%b '%y") %>
+		</p>
+		<p>
+  			<b>Length:</b>
+  			<%= seconds_to_time(@song.length) %>
+			</p>
+		<p>
+  			<b>Location:</b>
+  			<%= @song.location %>
+		</p>
+		<p>
+			<b>Youtube Code:</b>
+			<%= @song.youtube_code %>
+		</p>
+		<p>
+  			<b>Artist:</b>
+  			<%= @song.artist.full_name %> 
+		</p>
+ 		<p>
+   			<%= image_tag @song.artist.image_url.to_s, :size => "480x360"  %>  
+		</p>
+		<p>
+			<% dest = destination(@song.artist.first_name,@song.artist.last_name,@song.artist.band)+'/_/'+@song.name	 %> 
+		</p>
+		<p>
+  			<b>Destination:</b>	
+			<%= link_to(dest, dest, :target => "_new") %> 
+		</p>
+		<br/>
+		<p>
+			<%= link_to 'Edit', edit_song_path(@song) %> |
+			<%= link_to 'Back', songs_path %>
+		</p>
+	</div>
+	<div id="rightRail"></div>
+</div>

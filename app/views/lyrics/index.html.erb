@@ -1,0 +1,30 @@
+<% content_for :functional_nav do%>
+<li><%= link_to 'Add', new_lyric_path %></li>
+<% end %>
+<%= currently_at 'Lyrics'%>
+
+
+<table id="lyrics" class="display">
+<thead>	
+  <tr>
+ 
+    <th>Rank</th>      	
+    <th>Song</th>
+    <th>Content</th>
+
+  </tr>
+</thead>
+<tbody>
+<% @lyrics.each do |lyric| %>
+  <tr>
+    <td><%= link_to(lyric.song.rank, lyric) %></td>     
+    <td><%= lyric.song.name %></td>    
+    <td><%= truncate(lyric.content, length: 40) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Lyric', new_lyric_path %>
