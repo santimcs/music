@@ -5,7 +5,7 @@
 <li><%= link_to 'Destroy', @artist, method: :delete, data: { confirm: 'Are you sure?' } %></li>
 <% end %>
 <%= currently_at 'Artists'%>
-
+<% content_for :title, 'Show Artist' %>
 <p>
   <b>First name:</b>
   <%= @artist.first_name %>

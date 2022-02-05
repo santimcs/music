@@ -1,46 +1,31 @@
 class GenresController < ApplicationController
+  before_action :set_genre, only: [:show, :edit, :update, :destroy]
+
   # GET /genres
   # GET /genres.json
   def index
-    @genres = Genre.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @genres }
-    end
+    @genres = Genre.order(name: :asc)
   end
 
   # GET /genres/1
   # GET /genres/1.json
   def show
-    @genre = Genre.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @genre }
-    end
   end
 
   # GET /genres/new
   # GET /genres/new.json
   def new
     @genre = Genre.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @genre }
-    end
   end
 
   # GET /genres/1/edit
   def edit
-    @genre = Genre.find(params[:id])
   end
 
   # POST /genres
   # POST /genres.json
   def create
-    @genre = Genre.new(params[:genre])
+    @genre = Genre.new(genre_params)
 
     respond_to do |format|
       if @genre.save
@@ -56,10 +41,8 @@ class GenresController < ApplicationController
   # PUT /genres/1
   # PUT /genres/1.json
   def update
-    @genre = Genre.find(params[:id])
-
     respond_to do |format|
-      if @genre.update_attributes(params[:genre])
+      if @genre.update(genre_params)
         format.html { redirect_to @genre, notice: 'Genre was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,12 +55,22 @@ class GenresController < ApplicationController
   # DELETE /genres/1
   # DELETE /genres/1.json
   def destroy
-    @genre = Genre.find(params[:id])
     @genre.destroy
-
     respond_to do |format|
       format.html { redirect_to genres_url }
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_genre
+      @genre = Genre.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def genre_params
+      params.require(:genre).permit(:name)
+    end
+
 end

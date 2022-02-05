@@ -14,6 +14,8 @@ Music::Application.routes.draw do
   get "pages/home"
 	root :to => 'pages#home'
 
+  get "/list_songs", to: 'songs#list_songs'    
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

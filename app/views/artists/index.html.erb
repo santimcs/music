@@ -2,7 +2,7 @@
 <li><%= link_to 'Add', new_artist_path %></li>
 <% end %>
 <%= currently_at 'Artists'%>
-
+<% content_for :title, 'Artists' %>
 
 
 <table id="artists" class="display">
@@ -14,16 +14,17 @@
     <th>Image</th>
 
   </tr>
-
+<tbody>
 <% @artists.each do |artist| %>
   <tr>
     <td><%= link_to(artist.full_name, artist) %></td>
     <td><%= artist.band %></td>
-    <td><%= image_tag(artist.image_url.to_s, size: "100x70") %></td>
+    <td><%= image_tag(artist.image_url.to_s, size: "100x100") %></td>
 
   </tr>
 
 <% end %>
+</tbody>
 </table>
 
 <br />

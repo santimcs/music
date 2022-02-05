@@ -1,26 +1,26 @@
-<% content_for :functional_nav do%>
-<li><%= link_to 'Add', new_song_path %></li>
-<li><%= link_to 'Edit', edit_song_path(@song) %></li>
-<li><%= link_to 'Back', songs_path %></li>
-<li><%= link_to 'Destroy', @song, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+<% content_for :functional_nav do %>
+	<li><%= link_to 'Add', new_song_path %></li>
+	<li><%= link_to 'Edit', edit_song_path(@song) %></li>
+	<li><%= link_to 'Back', songs_path %></li>
+	<li><%= link_to 'Destroy', @song, method: :delete, data: { confirm: 'Are you sure?' } %></li>
 <% end %>
 <%= currently_at 'Songs'%>
-
+<% content_for :title, @song.name %>
 <div id="container">
 	<div id="center">
 		<br/>
-		<p align="center">
-			<%= audio_tag(@song.location, autoplay: false, controls: true) %>
+		<p align="left">
+			<%= audio_tag(@song.location, autoplay: false, controls: true, preload: "auto") %>
 		</p>
-
-  			<b>Lyric:</b>
-  			<% if Lyric.exists?(:song_id=>@song.id) %>
+		<p>
+  		<b><span style="color: blue"><%= @song.name %></span></b>
+  		</p>
+  		<% if Lyric.exists?(:song_id=>@song.id) %>
   			<%= simple_format(@song.lyric.content) %>
-  			<% else %>
+  		<% else %>
   			<%= 'No lyric' %>
-  			<% end %>
-
-	</div>
+  		<% end %>
+	</div> <!-- end of id center -->
 	<div id="leftRail">
 		<object width="300" height="247">
 			<param name="movie"></param>
@@ -37,16 +37,15 @@
 		</p>
 		<p>
   			<b>Name:</b>
-  			<%= @song.name %>
+  			<% wiki_song = 'https://en.wikipedia.org/wiki/' + CGI.escape(@song.name.tr(' ','_'))
+  				 %>
+  			<%= link_to(@song.name, wiki_song, :target => "_new") %>  			
 		</p>	
 		<p>
   			<b>Genre:</b>
   			<%= @song.genre.name %>
 		</p>
-		<p>
-  			<b>Rating:</b>
-  			<%= @song.rating %>
-		</p>		
+			
 		<p>
   			<b>Released_date:</b>
   			<%= @song.released_date.strftime("%b '%y") %>
@@ -55,33 +54,47 @@
   			<b>Length:</b>
   			<%= seconds_to_time(@song.length) %>
 			</p>
-		<p>
-  			<b>Location:</b>
-  			<%= @song.location %>
-		</p>
+
 		<p>
 			<b>Youtube Code:</b>
 			<%= @song.youtube_code %>
 		</p>
 		<p>
+  			<b>Location:</b>
+  			<%= @song.location %>
+		</p>		
+		<p>
+  			<b>Rating:</b>
+  			<%= @song.rating %>
+		</p>	
+		<p>
+  			<b>website:</b>
+  			<%= @song.website %>
+		</p>
+		<p>
+  			<b>image:</b>
+  			<%= @song.artist.image %>
+		</p>				
+		<p>
   			<b>Artist:</b>
-  			<%= @song.artist.full_name %> 
+  			<% wiki_artist = url_artist(@song.artist.first_name,@song.artist.last_name,@song.artist.band)	 %>
+  			<%= link_to(@song.artist.full_name, wiki_artist, :target => "_new") %> 
 		</p>
  		<p>
-   			<%= image_tag @song.artist.image_url.to_s, :size => "480x360"  %>  
+   			<%= image_tag @song.artist.image_url.to_s, :size => "480x480"  %>  
 		</p>
 		<p>
 			<% dest = destination(@song.artist.first_name,@song.artist.last_name,@song.artist.band)+'/_/'+@song.name	 %> 
 		</p>
 		<p>
-  			<b>Destination:</b>	
+   			<%= image_tag("lastfm.ico")  %>  
 			<%= link_to(dest, dest, :target => "_new") %> 
 		</p>
 		<br/>
 		<p>
 			<%= link_to 'Edit', edit_song_path(@song) %> |
-			<%= link_to 'Back', songs_path %>
+			<%= link_to 'Back', list_songs_path %>
 		</p>
-	</div>
+	</div> <!-- end of id leftRail -->
 	<div id="rightRail"></div>
 </div>

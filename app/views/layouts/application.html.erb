@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>
-    <% if content_for?(:title) %>
-      Music: <%= yield :title %>
-    <% else %>
-      Music
-    <% end %>
-  </title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %> 
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= render 'layouts/header' %>
-<%= image_tag("tagline.png", alt: "Music", id: "tagline") %>
-  <div class="container">
-    <section id="content">
-      <%# START:notifications %>
-      <% if notice %>
-        <p class="notification notice">
-          <%= notice %>
-        </p>
-      <% end %>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Santi Soontarinka">        
+        <title>
+            <% if content_for?(:title) %>
+                <%= yield :title %>
+            <% else %>
+                Music
+            <% end %>
+        </title>
+        <%= stylesheet_link_tag    "application" %>
+        <%= javascript_include_tag "application" %> 
+        <%= csrf_meta_tags %>
+    </head>
+    <body>
 
-      <% if alert %>
-        <p class="notification alert">
-          <%= alert %>
-        </p>
-      <% end %>
-      <%# END:notifications %>
-      <%= yield %>
-    </section>
-    
-    <section id="sidebar">
-      <nav id="functional_nav">      	
-        <ul>
+        <%= render 'layouts/header' %>
 
-          <%= yield :functional_nav %>
-        </ul>
-      </nav>
-      <%= yield :sidebar %>
-      <section id="recent_activity">
-        <header><h1 class="ir" id="recent">Recent Activity</h1></header>
-    <%#    <%= render partial: 'activity_items/recent' %>
-      </section>
-    </section>
-  </div>
-  <%= render 'layouts/footer' %>
-</body>
+        <div class="container">
+            <section id="content">
+                <%# START:notifications %>
+                <% if notice %>
+                    <p class="notification notice">
+                        <%= notice %>
+                    </p>
+                <% end %>
+                <% if alert %>
+                    <p class="notification alert">
+                        <%= alert %>
+                    </p>
+                <% end %>
+                <%# END:notifications %>
+                <%= yield %>
+            </section>
+        
+            <section id="sidebar">
+                <nav id="functional_nav">      	
+                    <ul>
+                        <%= yield :functional_nav %>
+                    </ul>
+                </nav>
+
+                <%= yield :sidebar %>
+
+            </section>
+
+        </div> <!-- end of class container -->
+
+        <%= render 'layouts/footer' %>
+        
+    </body>
 </html>
 

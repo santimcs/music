@@ -1,46 +1,35 @@
 class SongsController < ApplicationController
+  before_action :set_song, only: [:show, :edit, :update, :destroy]
+
   # GET /songs
   # GET /songs.json
   def index
     @songs = Song.includes(:artist).all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @songs }
-    end
   end
+
+  def list_songs
+      @songs = Song.where('website = True').order(rank: :asc)
+  end 
 
   # GET /songs/1
   # GET /songs/1.json
   def show
-    @song = Song.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @song }
-    end
   end
 
   # GET /songs/new
   # GET /songs/new.json
   def new
     @song = Song.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @song }
-    end
   end
 
   # GET /songs/1/edit
   def edit
-    @song = Song.find(params[:id])
   end
 
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(params[:song])
+    @song = Song.new(song_params)
 
     respond_to do |format|
       if @song.save
@@ -56,10 +45,8 @@ class SongsController < ApplicationController
   # PUT /songs/1
   # PUT /songs/1.json
   def update
-    @song = Song.find(params[:id])
-
     respond_to do |format|
-      if @song.update_attributes(params[:song])
+      if @song.update(song_params)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,12 +59,22 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song = Song.find(params[:id])
     @song.destroy
-
     respond_to do |format|
       format.html { redirect_to songs_url }
       format.json { head :no_content }
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_song
+      @song = Song.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def song_params
+      params.require(:song).permit(:genre_id, :length, :location, :name, :rank, :youtube_code, :released_date, :rating, :website, :artist_id)
+    end
+
 end
